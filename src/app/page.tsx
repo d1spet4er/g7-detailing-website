@@ -7,7 +7,6 @@ import {
   ArrowUpRight,
   Check,
   Clock3,
-  Instagram,
   MapPin,
   Menu,
   Phone,
