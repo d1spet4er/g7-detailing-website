@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #10110f;
-  --foreground: #f3f2ed;
-  --muted: #9b9d95;
-  --accent: #d4ff3f;
-  --surface: #1a1b18;
+  --background: #111416;
+  --foreground: #f0f4f4;
+  --muted: #9ba7a8;
+  --accent: #48d1cc;
+  --surface: #202629;
   --line: rgba(255,255,255,.13);
 }
 
@@ -18,20 +18,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-::selection { background: var(--accent); color: #111; }
+::selection { background: var(--accent); color: #111416; }
 a { color: inherit; text-decoration: none; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .site-grid {
-  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg,rgba(255,255,255,.035) 1px, transparent 1px);
   background-size: 48px 48px;
 }
-.text-outline { color: transparent; -webkit-text-stroke: 1px rgba(243,242,237,.65); }
+.text-outline { color: transparent; -webkit-text-stroke: 1px rgba(240,244,244,.65); }
 .hero-image { background-position: center; background-size: cover; }
 .section-kicker { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
 .accent-link { transition: background .2s ease, color .2s ease; }
-.accent-link:hover { background: #e3ff76; }
+.accent-link:hover { background: #6be0dc; }
 .service-card { transition: transform .25s ease, border-color .25s ease; }
-.service-card:hover { transform: translateY(-4px); border-color: rgba(212,255,63,.55); }
+.service-card:hover { transform: translateY(-4px); border-color: rgba(72,209,204,.55); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
