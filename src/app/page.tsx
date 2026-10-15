@@ -33,7 +33,7 @@ export default function Home() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const elements = document.querySelectorAll<HTMLElement>("[data-reveal], [data-reveal-item]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion || !("IntersectionObserver" in window)) {
       elements.forEach((element) => element.classList.add("is-visible"));
