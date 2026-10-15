@@ -30,3 +30,20 @@ button { cursor:pointer; }
 @keyframes glow-drift { from { transform:translate3d(-3%,-2%,0) rotate(-5deg); opacity:.65; } to { transform:translate3d(4%,3%,0) rotate(6deg); opacity:1; } }
 @keyframes orbit-breathe { from { opacity:.4; } to { opacity:1; } }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
+
+/* Subtle premium motion */
+body { background-image:radial-gradient(ellipse at 12% 18%,rgba(72,209,204,.045),transparent 34%),radial-gradient(ellipse at 88% 64%,rgba(72,209,204,.035),transparent 32%); background-attachment:fixed; }
+.hero-art { box-shadow:0 24px 80px rgba(0,0,0,.2),inset 0 0 0 1px rgba(255,255,255,.025); }
+.hero-art::after { filter:blur(8px); }
+.hero-orbit { box-shadow:0 0 24px rgba(72,209,204,.035); }
+.service-photo-wrap { isolation:isolate; }
+.service-photo-wrap::before { content:""; position:absolute; z-index:2; top:-40%; left:-75%; width:42%; height:180%; transform:rotate(18deg); background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),rgba(72,209,204,.12),transparent); opacity:0; pointer-events:none; }
+.service-card:hover .service-photo-wrap::before { opacity:1; animation:photo-glint .9s ease-out both; }
+button:not(:disabled) { transition:background-color .22s ease,transform .22s ease,box-shadow .22s ease; }
+button:not(:disabled):hover { box-shadow:0 8px 28px rgba(72,209,204,.09); }
+button:not(:disabled):active { transform:scale(.985); }
+@keyframes photo-glint { from { left:-75%; } to { left:145%; } }
+@media (prefers-reduced-motion:reduce) {
+  body { background-attachment:scroll; }
+  .service-card:hover .service-photo-wrap::before { animation:none; }
+}
