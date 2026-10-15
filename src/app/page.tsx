@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import {
-  ArrowDownRight, ArrowUpRight, Check, Clock3, MapPin,
+  ArrowDownRight, ArrowUpRight, ArrowRight, Check, Clock3, MapPin,
   Menu, Phone, ShieldCheck, Sparkles, X, Droplets, Gauge, Wind,
   Layers3, SprayCan, CircleDot, Armchair, CarFront
 } from "lucide-react";
@@ -84,11 +84,6 @@ export default function Home() {
             <button onClick={() => openContact()} className="rounded-xl bg-[#48d1cc] px-5 py-4 text-sm font-bold text-[#101719] transition hover:bg-[#72e0dc]">Подобрать уход <ArrowUpRight className="ml-4 inline" size={16}/></button>
             <a href="#services" className="rounded-xl border border-white/15 px-5 py-4 text-sm font-semibold text-white/80 transition hover:border-[#48d1cc]/60 hover:text-white">Посмотреть услуги <ArrowDownRight className="ml-3 inline" size={16}/></a>
           </div>
-          <div className="mt-12 grid max-w-lg grid-cols-3 border-t border-white/10 pt-5">
-            <div><span className="block text-xl font-bold">G7</span><span className="mt-1 block text-xs text-white/40">Детейлинг-центр</span></div>
-            <div><span className="block text-xl font-bold">09–21</span><span className="mt-1 block text-xs text-white/40">Каждый день</span></div>
-            <div><span className="block text-xl font-bold">КРД</span><span className="mt-1 block text-xs text-white/40">Краснодар</span></div>
-          </div>
         </div>
         <div className="hero-art relative flex min-h-[350px] items-end overflow-hidden rounded-[28px] border border-white/10 p-6 sm:min-h-[440px] sm:p-8 lg:min-h-[570px]">
           <img src="/images/hero-detailing.webp" alt="Полировка кузова автомобиля в детейлинг-студии" className="hero-photo absolute inset-0 h-full w-full object-cover" />
@@ -121,7 +116,6 @@ export default function Home() {
               </article>;
             })}
           </div>
-          <p className="mt-5 text-xs leading-5 text-white/35">Перечень услуг предварительный: перед публикацией подтвердим с G7 точные названия, состав работ и цены.</p>
         </div>
       </section>
 
