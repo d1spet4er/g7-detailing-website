@@ -134,3 +134,48 @@ button:not(:disabled):active { transform:scale(.985); }
   }
   .service-card:hover { transform: none; }
 }
+
+
+/* Ambient motion for the dark service and process sections */
+#services, #process {
+  position: relative;
+  isolation: isolate;
+}
+#services::before, #process::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: .72;
+  background:
+    radial-gradient(ellipse at 12% 28%, rgba(72,209,204,.075), transparent 34%),
+    radial-gradient(ellipse at 88% 72%, rgba(72,209,204,.055), transparent 32%);
+  background-size: 140% 140%;
+  animation: section-glow-drift 18s ease-in-out infinite alternate;
+}
+#services::after, #process::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom right, black, transparent 78%);
+  animation: section-grid-drift 32s linear infinite;
+}
+@keyframes section-glow-drift {
+  from { background-position: 0% 0%, 100% 100%; }
+  to { background-position: 100% 60%, 0% 30%; }
+}
+@keyframes section-grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: 56px 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #services::before, #process::before, #services::after, #process::after {
+    animation: none;
+  }
+}
