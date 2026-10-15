@@ -106,12 +106,12 @@ export default function Home() {
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {services.map((service) => {
               const Icon = service.icon;
-              return <article key={service.title} className="service-card flex min-h-[340px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#1a2224]">
+              return <article key={service.title} onClick={() => openContact(service.title)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openContact(service.title); } }} tabIndex={0} aria-label={`Уточнить стоимость: ${service.title}`} className="service-card flex min-h-[340px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#1a2224] transition hover:border-[#48d1cc]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#48d1cc]">
                 <div className="service-photo-wrap relative h-40 overflow-hidden sm:h-44"><img src={"/images/" + service.image} alt={service.title} loading="lazy" className="service-photo h-full w-full object-cover" /><span className="absolute left-4 top-4 rounded-full border border-white/20 bg-[#101719]/75 px-3 py-1 text-[10px] text-white/80 backdrop-blur">{service.tag}</span><span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-lg bg-[#101719]/80 text-[#48d1cc] backdrop-blur"><Icon size={18}/></span></div>
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h3 className="text-xl font-bold leading-snug tracking-tight">{service.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-6 text-white/55">{service.text}</p>
-                <button onClick={() => openContact(service.title)} className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-sm font-semibold text-white/80 transition hover:text-[#48d1cc]"><span>Уточнить стоимость</span><ArrowUpRight size={17}/></button>
+                <button onClick={(event) => { event.stopPropagation(); openContact(service.title); }} className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-sm font-semibold text-white/80 transition hover:text-[#48d1cc]"><span>Уточнить стоимость</span><ArrowUpRight size={17}/></button>
                 </div>
               </article>;
             })}
