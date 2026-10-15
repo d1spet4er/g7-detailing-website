@@ -148,7 +148,7 @@ export default function Home() {
           <p className="section-kicker">Наш подход</p>
           <h2 className="mt-4 text-4xl font-extrabold leading-[.98] tracking-[-.055em] sm:text-5xl">У КАЖДОЙ<br/>ДЕТАЛИ ЕСТЬ<br/><span className="text-white/35">СВОЙ ПОДХОД.</span></h2>
           <p className="mt-6 max-w-lg text-sm leading-7 text-white/60">Материалы кузова и салона требуют разного ухода. Перед работой важно понять задачу, состояние автомобиля и ожидаемый результат — чтобы подобрать подходящую процедуру.</p>
-          <ul className="mt-7 space-y-4">{["Подбор процедуры под состояние автомобиля","Согласование объёма работ до начала","Понятная коммуникация по стоимости и срокам"].map(item => <li key={item} className="flex items-start gap-3 text-sm text-white/75"><Check className="mt-0.5 shrink-0 text-[#48d1cc]" size={17}/>{item}</li>)}</ul>
+          <ul className="mt-7 space-y-4">{["Подбор процедуры под состояние автомобиля","Согласование объёма работ до начала","Понятная коммуникация по стоимости и срокам","Использование только качественной химии"].map(item => <li key={item} className="flex items-start gap-3 text-sm text-white/75"><Check className="mt-0.5 shrink-0 text-[#48d1cc]" size={17}/>{item}</li>)}</ul>
         </div>
       </section>
 
