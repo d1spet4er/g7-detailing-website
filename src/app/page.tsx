@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDownRight, ArrowUpRight, ArrowRight, Check, Clock3, MapPin,
   Menu, Phone, ShieldCheck, Sparkles, X, Droplets, Gauge, Wind,
@@ -31,6 +31,27 @@ export default function Home() {
   const [name, setName] = useState("");
   const [car, setCar] = useState("");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
 
   const openContact = (service = "") => {
     setSelectedService(service);
@@ -75,7 +96,7 @@ export default function Home() {
         <button onClick={() => { closeMenu(); openContact(); }} className="w-fit rounded-lg bg-[#48d1cc] px-4 py-3 font-bold text-black">Оставить заявку</button>
       </nav>}
 
-      <section id="top" className="mx-auto grid max-w-[1320px] items-center gap-10 px-5 pb-20 pt-12 md:px-8 md:pb-28 md:pt-16 lg:grid-cols-[1.1fr_.9fr] lg:gap-14 lg:px-12">
+      <section id="top" data-reveal className="mx-auto grid max-w-[1320px] items-center gap-10 px-5 pb-20 pt-12 md:px-8 md:pb-28 md:pt-16 lg:grid-cols-[1.1fr_.9fr] lg:gap-14 lg:px-12">
         <div>
           <div className="mb-7 flex items-center gap-3 text-xs font-semibold text-white/50"><span className="h-px w-8 bg-[#48d1cc]" /> Уход за автомобилем в Краснодаре</div>
           <h1 className="max-w-[760px] text-[clamp(3.5rem,8vw,7.4rem)] font-black leading-[.88] tracking-[-.075em]">ДЕТАЛИ<br/>РЕШАЮТ<span className="text-[#48d1cc]">.</span><br/><span className="text-outline">МЫ ЗНАЕМ.</span></h1>
@@ -97,7 +118,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="services" className="border-y border-white/8 bg-[#151b1d]">
+      <section id="services" data-reveal className="border-y border-white/8 bg-[#151b1d]">
         <div className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-28 lg:px-12">
           <div className="mb-10 flex flex-col justify-between gap-5 md:mb-12 md:flex-row md:items-end">
             <div><p className="section-kicker">Услуги G7</p><h2 className="mt-4 text-4xl font-extrabold leading-[.98] tracking-[-.055em] sm:text-6xl">УХОД, КОТОРЫЙ<br/><span className="text-white/35">ЧУВСТВУЕТСЯ.</span></h2></div>
@@ -106,7 +127,7 @@ export default function Home() {
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {services.map((service) => {
               const Icon = service.icon;
-              return <article key={service.title} onClick={() => openContact(service.title)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openContact(service.title); } }} tabIndex={0} aria-label={`Уточнить стоимость: ${service.title}`} className="service-card flex min-h-[340px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#1a2224] transition hover:border-[#48d1cc]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#48d1cc]">
+              return <article data-reveal-item key={service.title} onClick={() => openContact(service.title)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openContact(service.title); } }} tabIndex={0} aria-label={`Уточнить стоимость: ${service.title}`} className="service-card flex min-h-[340px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#1a2224] transition hover:border-[#48d1cc]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#48d1cc]">
                 <div className="service-photo-wrap relative h-40 overflow-hidden sm:h-44"><img src={"/images/" + service.image} alt={service.title} loading="lazy" className="service-photo h-full w-full object-cover" /><span className="absolute left-4 top-4 rounded-full border border-white/20 bg-[#101719]/75 px-3 py-1 text-[10px] text-white/80 backdrop-blur">{service.tag}</span><span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-lg bg-[#101719]/80 text-[#48d1cc] backdrop-blur"><Icon size={18}/></span></div>
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h3 className="text-xl font-bold leading-snug tracking-tight">{service.title}</h3>
@@ -119,7 +140,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="approach" className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-2 lg:gap-20 lg:px-12">
+      <section id="approach" data-reveal className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-2 lg:gap-20 lg:px-12">
         <div className="approach-panel relative flex min-h-[330px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/10 p-7 sm:min-h-[420px] sm:p-9">
           <img src="/images/kozha.webp" alt="Детальная очистка кожаной обивки" loading="lazy" className="approach-photo absolute inset-0 h-full w-full object-cover" />
           <div className="approach-shade absolute inset-0" />
@@ -133,14 +154,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="process" className="border-y border-white/8 bg-[#151b1d]">
+      <section id="process" data-reveal className="border-y border-white/8 bg-[#151b1d]">
         <div className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-24 lg:px-12">
           <div className="max-w-2xl"><p className="section-kicker">Просто и понятно</p><h2 className="mt-4 text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">КАК МЫ РАБОТАЕМ</h2><p className="mt-4 text-sm leading-7 text-white/55">Оставьте заявку — детали и свободное время подтвердит сотрудник студии.</p></div>
-          <div className="mt-10 grid gap-3 md:grid-cols-3">{steps.map(([n,title,text]) => <article key={n} className="rounded-2xl border border-white/10 bg-[#1a2224] p-6 sm:p-7"><span className="text-sm font-bold text-[#48d1cc]">{n}</span><h3 className="mt-6 text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-white/55">{text}</p></article>)}</div>
+          <div className="mt-10 grid gap-3 md:grid-cols-3">{steps.map(([n,title,text]) => <article data-reveal-item key={n} className="rounded-2xl border border-white/10 bg-[#1a2224] p-6 sm:p-7"><span className="text-sm font-bold text-[#48d1cc]">{n}</span><h3 className="mt-6 text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-white/55">{text}</p></article>)}</div>
         </div>
       </section>
 
-      <section id="contacts" className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-[1fr_.8fr] lg:gap-20 lg:px-12">
+      <section id="contacts" data-reveal className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-[1fr_.8fr] lg:gap-20 lg:px-12">
         <div><p className="section-kicker">Связаться с G7</p><h2 className="mt-4 text-5xl font-black leading-[.9] tracking-[-.07em] sm:text-7xl">ТВОЙ АВТОМОБИЛЬ.<br/><span className="text-[#48d1cc]">НОВЫЙ УРОВЕНЬ.</span></h2><p className="mt-6 max-w-lg text-sm leading-7 text-white/55">Расскажите, что хотите улучшить. Поможем сориентироваться по услугам, стоимости и времени.</p><button onClick={() => openContact()} className="mt-8 rounded-xl bg-[#48d1cc] px-5 py-4 text-sm font-bold text-[#101719] transition hover:bg-[#72e0dc]">Обсудить задачу <ArrowUpRight className="ml-4 inline" size={16}/></button></div>
         <div className="flex flex-col justify-center gap-7 rounded-2xl border border-white/10 bg-[#151b1d] p-6 sm:p-8">
           <a href="tel:+79615235877" className="flex items-start gap-4"><Phone className="mt-1 text-[#48d1cc]" size={19}/><span><span className="block text-xs text-white/45">Телефон</span><span className="mt-1 block text-xl font-bold sm:text-2xl">+7 961 523-58-77</span></span></a>
