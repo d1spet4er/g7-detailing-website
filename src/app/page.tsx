@@ -2,183 +2,183 @@
 
 import { useState } from "react";
 import {
-  ArrowDownRight,
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  Clock3,
-  MapPin,
-  Menu,
-  Phone,
-  ShieldCheck,
-  Sparkles,
-  X,
+  ArrowDownRight, ArrowRight, ArrowUpRight, Check, Clock3, MapPin,
+  Menu, Phone, ShieldCheck, Sparkles, X, Droplets, Gauge, Wind,
+  Layers3, SprayCan, CircleDot, Armchair, CarFront
 } from "lucide-react";
 
 const services = [
-  { number: "01", title: "Полировка кузова", text: "Возвращаем лаку глубину цвета и блеск, убираем мелкие риски и следы эксплуатации.", price: "от 10 000 ₽", image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1000&q=85" },
-  { number: "02", title: "Химчистка салона", text: "Глубокая очистка текстиля, ковров и труднодоступных зон с вниманием к деталям.", price: "от 16 000 ₽", image: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=1000&q=85" },
-  { number: "03", title: "Уход за кожей", text: "Деликатная очистка и уход за кожаными поверхностями, чтобы сохранить их фактуру.", price: "от 3 000 ₽", image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85" },
-  { number: "04", title: "Защитные покрытия", text: "Гидрофобный эффект и дополнительная защита лакокрасочного покрытия.", price: "по запросу", image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1000&q=85" },
+  { title: "Полировка кузова", text: "Работа с блеском, мелкими рисками и следами эксплуатации лакокрасочного покрытия.", icon: Sparkles, tag: "Кузов" },
+  { title: "Химчистка салона", text: "Глубокая очистка текстиля, ковров и труднодоступных зон салона.", icon: Armchair, tag: "Салон" },
+  { title: "Уход за кожей", text: "Деликатная очистка и уход за кожаными поверхностями с сохранением фактуры.", icon: Layers3, tag: "Салон" },
+  { title: "Очистка пластика", text: "Очистка пластиковых элементов интерьера и аккуратное восстановление опрятного вида.", icon: SprayCan, tag: "Салон" },
+  { title: "Очистка подкапотного пространства", text: "Уход за подкапотной зоной с учётом материалов и особенностей автомобиля.", icon: Gauge, tag: "Уход" },
+  { title: "Удаление битума и металлических вкраплений", text: "Очистка кузова от стойких дорожных загрязнений специальными составами.", icon: CircleDot, tag: "Кузов" },
+  { title: "Защитные покрытия", text: "Дополнительная защита поверхности и гидрофобный эффект — по состоянию кузова.", icon: ShieldCheck, tag: "Защита" },
+  { title: "Мойка и внешний уход", text: "Бережное удаление повседневных загрязнений и поддержание чистоты автомобиля.", icon: Droplets, tag: "Уход" },
 ];
 
-const gallery = [
-  { label: "Внимание к деталям", image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1000&q=85" },
-  { label: "Чистота в каждом шве", image: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=1000&q=85" },
-  { label: "Глубокий блеск", image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1000&q=85" },
+const steps = [
+  ["01", "Расскажите о задаче", "Выберите услугу или опишите, что хотите привести в порядок."],
+  ["02", "Согласуем детали", "Уточним автомобиль, состояние поверхности и ориентир по стоимости."],
+  ["03", "Подтвердим время", "Студия сообщит доступные варианты и согласует запись."],
 ];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [name, setName] = useState("");
+  const [car, setCar] = useState("");
+  const [message, setMessage] = useState("");
 
+  const openContact = (service = "") => {
+    setSelectedService(service);
+    setShowContact(true);
+  };
   const closeMenu = () => setMenuOpen(false);
+  const sendRequest = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const body = [
+      "Здравствуйте! Хочу узнать по услугам G7.",
+      selectedService ? `Услуга: ${selectedService}` : "",
+      car ? `Автомобиль: ${car}` : "",
+      name ? `Как обращаться: ${name}` : "",
+      message ? `Комментарий: ${message}` : "",
+      "Подскажите стоимость и доступное время."
+    ].filter(Boolean).join("\n");
+    window.open(`https://wa.me/79615235877?text=${encodeURIComponent(body)}`, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <main className="overflow-hidden">
-      <div className="border-b border-white/10 bg-[#171a1c] px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[.16em] text-[#48d1cc] sm:text-xs">
-        GARAGE 007 · DETAILING CENTER · КРАСНОДАР
+      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-white/10 px-5 py-2.5 text-[10px] font-semibold tracking-[.12em] text-white/60 sm:text-xs">
+        <span className="h-1.5 w-1.5 rounded-full bg-[#48d1cc]" />
+        GARAGE 007 <span className="text-white/25">/</span> DETAILING CENTER <span className="text-white/25">/</span> КРАСНОДАР
       </div>
 
-      <header className="relative z-30 mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 md:px-10 lg:px-14">
+      <header className="relative z-30 mx-auto flex max-w-[1320px] items-center justify-between px-5 py-5 md:px-8 lg:px-12">
         <a href="#top" className="flex items-center gap-3" aria-label="G7 — на главную">
-          <span className="flex h-11 w-11 items-center justify-center border border-[#48d1cc] text-xl font-black tracking-tighter text-[#48d1cc]">G7</span>
-          <span className="leading-tight"><span className="block text-sm font-black tracking-[.14em]">GARAGE 007</span><span className="mt-1 block text-[9px] tracking-[.27em] text-white/50">DETAILING CENTER</span></span>
+          <span className="flex h-11 w-12 items-center justify-center rounded-xl bg-[#48d1cc] text-lg font-black tracking-[-.08em] text-[#101719]">G7</span>
+          <span className="leading-tight"><span className="block text-sm font-extrabold tracking-[.08em]">GARAGE 007</span><span className="mt-1 block text-[9px] tracking-[.2em] text-white/45">DETAILING CENTER</span></span>
         </a>
-        <nav className="hidden items-center gap-8 text-xs text-white/70 lg:flex">
-          <a className="transition hover:text-[#48d1cc]" href="#services">Услуги</a>
-          <a className="transition hover:text-[#48d1cc]" href="#about">О студии</a>
-          <a className="transition hover:text-[#48d1cc]" href="#works">Работы</a>
-          <a className="transition hover:text-[#48d1cc]" href="#contacts">Контакты</a>
+        <nav className="hidden items-center gap-7 text-sm text-white/65 lg:flex">
+          <a className="hover:text-[#48d1cc]" href="#services">Услуги</a>
+          <a className="hover:text-[#48d1cc]" href="#approach">Подход</a>
+          <a className="hover:text-[#48d1cc]" href="#process">Как работаем</a>
+          <a className="hover:text-[#48d1cc]" href="#contacts">Контакты</a>
         </nav>
         <div className="hidden items-center gap-5 sm:flex">
           <a href="tel:+79615235877" className="text-sm font-semibold">+7 961 523-58-77</a>
-          <button onClick={() => setShowContact(true)} className="accent-link flex items-center gap-3 bg-[#48d1cc] px-5 py-3 text-xs font-bold text-black">Записаться <ArrowUpRight size={15} /></button>
+          <button onClick={() => openContact()} className="rounded-xl bg-[#48d1cc] px-5 py-3 text-sm font-bold text-[#101719] transition hover:bg-[#72e0dc]">Оставить заявку <ArrowUpRight className="ml-2 inline" size={15} /></button>
         </div>
-        <button className="flex h-11 w-11 items-center justify-center border border-white/20 lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}>
-          {menuOpen ? <X /> : <Menu />}
-        </button>
+        <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}>{menuOpen ? <X /> : <Menu />}</button>
       </header>
 
-      {menuOpen && <nav className="relative z-30 flex flex-col gap-5 border-y border-white/10 bg-[#171815] px-6 py-6 text-sm lg:hidden">
-        {[["Услуги", "#services"], ["О студии", "#about"], ["Работы", "#works"], ["Контакты", "#contacts"]].map(([label, href]) => <a key={href} href={href} onClick={closeMenu}>{label}</a>)}
-        <a href="tel:+79615235877" className="font-bold text-[#48d1cc]">+7 961 523-58-77</a>
+      {menuOpen && <nav className="relative z-30 flex flex-col gap-5 border-y border-white/10 bg-[#171e20] px-6 py-6 text-sm lg:hidden">
+        { [["Услуги", "#services"], ["Подход", "#approach"], ["Как работаем", "#process"], ["Контакты", "#contacts"]].map(([label, href]) => <a key={href} href={href} onClick={closeMenu}>{label}</a>)}
+        <button onClick={() => { closeMenu(); openContact(); }} className="w-fit rounded-lg bg-[#48d1cc] px-4 py-3 font-bold text-black">Оставить заявку</button>
       </nav>}
 
-      <section id="top" className="site-grid relative mx-auto grid min-h-[690px] max-w-[1440px] grid-cols-1 px-5 pb-16 pt-8 md:px-10 md:pt-12 lg:min-h-[730px] lg:grid-cols-[1.05fr_.95fr] lg:px-14 lg:pb-20">
-        <div className="relative z-10 flex flex-col items-start justify-center pb-12 lg:pb-20">
-          <div className="mb-7 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.22em] text-white/55"><span className="h-px w-8 bg-[#48d1cc]" /> Уход за автомобилем без компромиссов</div>
-          <h1 className="max-w-[760px] text-[clamp(3.7rem,9vw,8.4rem)] font-black leading-[.84] tracking-[-.075em]">ДЕТАЛИ<br />РЕШАЮТ<span className="text-[#48d1cc]">.</span><br /><span className="text-outline">МЫ ЗНАЕМ.</span></h1>
-          <p className="mt-8 max-w-md text-sm leading-7 text-white/60 md:text-base">Детейлинг, который возвращает автомобилю характер. Бережная работа с кузовом и салоном — с вниманием к каждой мелочи.</p>
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <button onClick={() => setShowContact(true)} className="accent-link flex items-center gap-5 bg-[#48d1cc] px-6 py-4 text-xs font-bold text-black">Обсудить уход за авто <ArrowUpRight size={17} /></button>
-            <a href="#services" className="flex items-center gap-2 px-3 py-4 text-xs text-white/65 transition hover:text-white">Все услуги <ArrowDownRight size={16} /></a>
+      <section id="top" className="mx-auto grid max-w-[1320px] items-center gap-10 px-5 pb-20 pt-12 md:px-8 md:pb-28 md:pt-16 lg:grid-cols-[1.1fr_.9fr] lg:gap-14 lg:px-12">
+        <div>
+          <div className="mb-7 flex items-center gap-3 text-xs font-semibold text-white/50"><span className="h-px w-8 bg-[#48d1cc]" /> Уход за автомобилем в Краснодаре</div>
+          <h1 className="max-w-[760px] text-[clamp(3.5rem,8vw,7.4rem)] font-black leading-[.88] tracking-[-.075em]">ДЕТАЛИ<br/>РЕШАЮТ<span className="text-[#48d1cc]">.</span><br/><span className="text-outline">МЫ ЗНАЕМ.</span></h1>
+          <p className="mt-7 max-w-lg text-base leading-7 text-white/60 md:text-lg md:leading-8">Детейлинг и бережный уход за кузовом и салоном. Помогаем выбрать процедуры под состояние автомобиля — без лишнего и с вниманием к деталям.</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button onClick={() => openContact()} className="rounded-xl bg-[#48d1cc] px-5 py-4 text-sm font-bold text-[#101719] transition hover:bg-[#72e0dc]">Подобрать уход <ArrowUpRight className="ml-4 inline" size={16}/></button>
+            <a href="#services" className="rounded-xl border border-white/15 px-5 py-4 text-sm font-semibold text-white/80 transition hover:border-[#48d1cc]/60 hover:text-white">Посмотреть услуги <ArrowDownRight className="ml-3 inline" size={16}/></a>
           </div>
-          <div className="mt-14 flex w-full max-w-lg gap-8 border-t border-white/15 pt-6 sm:gap-14">
-            <div><span className="block text-2xl font-black">G7</span><span className="mt-1 block text-[9px] uppercase tracking-[.18em] text-white/45">Detailing center</span></div>
-            <div><span className="block text-2xl font-black">09–21</span><span className="mt-1 block text-[9px] uppercase tracking-[.18em] text-white/45">Ежедневно</span></div>
-            <div><span className="block text-2xl font-black">KRD</span><span className="mt-1 block text-[9px] uppercase tracking-[.18em] text-white/45">Краснодар</span></div>
+          <div className="mt-12 grid max-w-lg grid-cols-3 border-t border-white/10 pt-5">
+            <div><span className="block text-xl font-bold">G7</span><span className="mt-1 block text-xs text-white/40">Детейлинг-центр</span></div>
+            <div><span className="block text-xl font-bold">09–21</span><span className="mt-1 block text-xs text-white/40">Каждый день</span></div>
+            <div><span className="block text-xl font-bold">КРД</span><span className="mt-1 block text-xs text-white/40">Краснодар</span></div>
           </div>
         </div>
-        <div className="relative min-h-[370px] lg:min-h-0">
-          <div className="hero-image absolute inset-0 bottom-8 left-5 bg-[#272923]" style={{ backgroundImage: "linear-gradient(180deg,rgba(16,17,15,.02),rgba(16,17,15,.42)),url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=90')" }} />
-          <div className="absolute -left-1 top-8 hidden h-32 w-32 border-l border-t border-[#48d1cc]/70 lg:block" />
-          <div className="absolute -bottom-1 right-0 flex items-center gap-4 bg-[#48d1cc] px-5 py-4 text-black sm:px-7 sm:py-5">
-            <Sparkles size={21} />
-            <div><span className="block text-xs font-black uppercase tracking-wider">Чистый результат</span><span className="mt-1 block text-[10px] text-black/65">Внимание к каждой детали</span></div>
+        <div className="hero-art relative flex min-h-[350px] items-end overflow-hidden rounded-[28px] border border-white/10 p-6 sm:min-h-[440px] sm:p-8 lg:min-h-[570px]">
+          <div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" />
+          <div className="relative z-10 max-w-xs rounded-2xl border border-white/10 bg-[#111719]/85 p-5 backdrop-blur-md">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#48d1cc]/15 text-[#48d1cc]"><CarFront size={21}/></span>
+            <p className="mt-4 text-lg font-bold">Автомобиль — в деталях.</p>
+            <p className="mt-2 text-sm leading-6 text-white/55">Подберём подходящий уход и заранее обсудим объём работ.</p>
           </div>
-          <span className="absolute right-0 top-0 hidden text-[9px] tracking-[.25em] text-white/45 [writing-mode:vertical-rl] lg:block">PRECISION · CARE · FINISH</span>
+          <span className="absolute right-6 top-6 rounded-full border border-[#48d1cc]/35 px-3 py-2 text-[10px] font-bold tracking-[.16em] text-[#48d1cc]">G7 / DETAILING</span>
         </div>
       </section>
 
-      <div className="border-y border-white/10 bg-[#171815]">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-2 divide-x divide-y divide-white/10 px-5 sm:grid-cols-4 sm:divide-y-0 md:px-10 lg:px-14">
-          {[["01", "Бережный подход"], ["02", "Работа с деталями"], ["03", "Подбор ухода"], ["04", "Результат в фокусе"]].map(([n, t]) => <div key={n} className="flex items-center gap-3 py-5 sm:py-6"><span className="text-[10px] text-[#48d1cc]">{n}</span><span className="text-[10px] font-semibold uppercase tracking-[.12em] text-white/70 sm:text-xs">{t}</span></div>)}
-        </div>
-      </div>
-
-      <section id="services" className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32 lg:px-14">
-        <div className="mb-12 flex flex-col justify-between gap-6 md:mb-16 md:flex-row md:items-end">
-          <div><p className="section-kicker">01 / Услуги</p><h2 className="mt-5 text-4xl font-black tracking-[-.055em] sm:text-6xl">УХОД, КОТОРЫЙ<br /><span className="text-white/35">ЧУВСТВУЕТСЯ.</span></h2></div>
-          <p className="max-w-sm text-sm leading-7 text-white/55">Подберём подходящий уход под состояние автомобиля и ваши задачи. Итоговая стоимость зависит от размера авто и объёма работ.</p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {services.map((service) => <article key={service.number} className="service-card group overflow-hidden border border-white/10 bg-[#171815]">
-            <div className="relative h-56 overflow-hidden sm:h-64">
-              <div className="hero-image absolute inset-0 transition duration-700 group-hover:scale-105" style={{ backgroundImage: `linear-gradient(180deg,rgba(16,17,15,0),rgba(16,17,15,.25)),url('${service.image}')` }} />
-              <span className="absolute left-5 top-5 text-xs font-bold text-[#48d1cc]">{service.number} / 04</span>
-              <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#48d1cc] text-black"><ArrowUpRight size={19} /></span>
-            </div>
-            <div className="p-6 sm:p-8">
-              <div className="flex flex-wrap items-start justify-between gap-3"><h3 className="text-2xl font-bold tracking-tight">{service.title}</h3><span className="pt-1 text-xs font-semibold text-[#48d1cc]">{service.price}</span></div>
-              <p className="mt-4 max-w-lg text-sm leading-6 text-white/55">{service.text}</p>
-              <button onClick={() => setShowContact(true)} className="mt-7 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.17em] text-white/80 transition group-hover:text-[#48d1cc]">Уточнить детали <ArrowRight size={14} /></button>
-            </div>
-          </article>)}
-        </div>
-        <p className="mt-5 text-[11px] leading-5 text-white/35">Цены ориентировочные и требуют подтверждения студией. Точная стоимость рассчитывается после уточнения автомобиля и состояния поверхностей.</p>
-      </section>
-
-      <section id="about" className="border-y border-white/10 bg-[#171815]">
-        <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-[.9fr_1.1fr] lg:gap-20 lg:px-14">
-          <div className="relative min-h-[370px]">
-            <div className="hero-image absolute inset-0 right-8 bottom-8" style={{ backgroundImage: "linear-gradient(0deg,rgba(16,17,15,.1),rgba(16,17,15,.1)),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85')" }} />
-            <div className="absolute bottom-0 right-0 flex h-28 w-28 flex-col justify-center bg-[#48d1cc] p-4 text-black"><span className="text-3xl font-black">G7</span><span className="mt-1 text-[9px] font-bold uppercase tracking-widest">Garage 007</span></div>
+      <section id="services" className="border-y border-white/8 bg-[#151b1d]">
+        <div className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-28 lg:px-12">
+          <div className="mb-10 flex flex-col justify-between gap-5 md:mb-12 md:flex-row md:items-end">
+            <div><p className="section-kicker">Услуги G7</p><h2 className="mt-4 text-4xl font-extrabold leading-[.98] tracking-[-.055em] sm:text-6xl">УХОД, КОТОРЫЙ<br/><span className="text-white/35">ЧУВСТВУЕТСЯ.</span></h2></div>
+            <p className="max-w-md text-sm leading-7 text-white/55">Выберите направление — расскажем, что подойдёт вашему автомобилю. Точную стоимость и время согласуем до начала работ.</p>
           </div>
-          <div className="flex flex-col justify-center">
-            <p className="section-kicker">02 / Подход</p>
-            <h2 className="mt-5 text-4xl font-black leading-[.95] tracking-[-.055em] sm:text-6xl">НЕ ПРОСТО<br />ЧИСТО.<br /><span className="text-[#48d1cc]">ПРАВИЛЬНО.</span></h2>
-            <p className="mt-7 max-w-lg text-sm leading-7 text-white/60">Детейлинг начинается с внимания. К покрытию, материалам салона, особенностям автомобиля и вашим ожиданиям. Мы помогаем выбрать подходящие процедуры — без лишнего и с фокусом на результат.</p>
-            <div className="mt-8 space-y-4">
-              {["Подбор процедуры под состояние автомобиля", "Аккуратная работа с разными материалами", "Понятное согласование работ перед началом"].map((item) => <div key={item} className="flex items-center gap-3 text-sm text-white/80"><span className="flex h-6 w-6 items-center justify-center border border-[#48d1cc]/50 text-[#48d1cc]"><Check size={13} /></span>{item}</div>)}
-            </div>
-            <a href="#contacts" className="mt-9 flex w-fit items-center gap-3 border-b border-[#48d1cc] pb-3 text-xs font-bold uppercase tracking-widest text-[#48d1cc]">Связаться со студией <ArrowUpRight size={16} /></a>
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return <article key={service.title} className="service-card flex min-h-[260px] flex-col rounded-2xl border border-white/10 bg-[#1a2224] p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-3"><span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#48d1cc]/10 text-[#48d1cc]"><Icon size={21}/></span><span className="rounded-full border border-white/10 px-3 py-1 text-[10px] text-white/45">{service.tag}</span></div>
+                <h3 className="mt-6 text-xl font-bold leading-snug tracking-tight">{service.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-6 text-white/55">{service.text}</p>
+                <button onClick={() => openContact(service.title)} className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-sm font-semibold text-white/80 transition hover:text-[#48d1cc]"><span>Уточнить стоимость</span><ArrowUpRight size={17}/></button>
+              </article>;
+            })}
           </div>
+          <p className="mt-5 text-xs leading-5 text-white/35">Перечень услуг предварительный: перед публикацией подтвердим с G7 точные названия, состав работ и цены.</p>
         </div>
       </section>
 
-      <section id="works" className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32 lg:px-14">
-        <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-          <div><p className="section-kicker">03 / Атмосфера</p><h2 className="mt-5 text-4xl font-black tracking-[-.055em] sm:text-6xl">РАБОТА В ДЕТАЛЯХ<span className="text-[#48d1cc]">.</span></h2></div>
-          <p className="max-w-xs text-sm leading-6 text-white/50">Каждая поверхность требует своего подхода. Больше примеров работ можно запросить у студии.</p>
+      <section id="approach" className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-2 lg:gap-20 lg:px-12">
+        <div className="approach-panel relative flex min-h-[330px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/10 p-7 sm:min-h-[420px] sm:p-9">
+          <div className="approach-mark">G7</div>
+          <div className="relative z-10"><span className="inline-flex items-center gap-2 rounded-full border border-[#48d1cc]/25 bg-[#48d1cc]/8 px-3 py-2 text-xs text-[#48d1cc]"><Sparkles size={14}/> Внимание к деталям</span><p className="mt-5 max-w-sm text-2xl font-bold leading-snug sm:text-3xl">Не просто чисто.<br/><span className="text-[#48d1cc]">Правильно.</span></p></div>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {gallery.map((item, index) => <div key={item.label} className={`group relative h-[330px] overflow-hidden bg-[#1a1b18] ${index === 1 ? "md:mt-12" : ""}`}>
-            <div className="hero-image absolute inset-0 transition duration-700 group-hover:scale-105" style={{ backgroundImage: `linear-gradient(0deg,rgba(16,17,15,.75),rgba(16,17,15,.05) 65%),url('${item.image}')` }} />
-            <span className="absolute left-5 top-5 text-xs text-[#48d1cc]">0{index + 1}</span>
-            <span className="absolute bottom-5 left-5 text-sm font-bold">{item.label}</span>
-          </div>)}
-        </div>
-        <p className="mt-5 text-[11px] text-white/35">Фотографии на этой концепции — демонстрационные. Перед публикацией их нужно заменить реальными работами G7.</p>
-      </section>
-
-      <section id="contacts" className="relative border-y border-white/10 bg-[#171a1c] text-white">
-        <div className="site-grid absolute inset-0 opacity-10" />
-        <div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-[1.2fr_.8fr] lg:px-14">
-          <div><p className="section-kicker">04 / Контакты</p><h2 className="mt-5 text-5xl font-black leading-[.88] tracking-[-.065em] sm:text-7xl">ТВОЙ АВТОМОБИЛЬ.<br />НОВЫЙ<br />УРОВЕНЬ.</h2><p className="mt-7 max-w-md text-sm leading-6 text-white/60">Расскажите, что хотите улучшить — поможем подобрать подходящую услугу и сориентируем по стоимости.</p><button onClick={() => setShowContact(true)} className="mt-8 flex items-center gap-4 bg-[#48d1cc] px-6 py-4 text-xs font-bold text-black transition hover:bg-[#6be0dc]">Связаться с G7 <ArrowUpRight size={17} /></button></div>
-          <div className="flex flex-col justify-center gap-7 border-t border-white/15 pt-8 lg:border-l lg:border-t-0 lg:border-white/15 lg:pl-10 lg:pt-0">
-            <a href="tel:+79615235877" className="flex items-start gap-4"><Phone size={19} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Телефон</span><span className="mt-2 block text-xl font-black sm:text-2xl">+7 961 523-58-77</span></span></a>
-            <div className="flex items-start gap-4"><MapPin size={20} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Адрес студии</span><span className="mt-2 block text-base font-bold">Краснодар, ул. Шоссе Нефтяников, 22, стр. 1</span><a className="mt-2 inline-block border-b border-[#48d1cc]/60 pb-1 text-xs font-semibold text-[#48d1cc]" href="https://yandex.com/maps/?text=G7%20Detailing%20Center%20Краснодар" target="_blank" rel="noreferrer">Построить маршрут ↗</a></span></div>
-            <div className="flex items-start gap-4"><Clock3 size={20} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Время работы</span><span className="mt-2 block text-base font-bold">Ежедневно, 09:00–21:00</span></span></div>
-            <div className="flex items-start gap-4"><ShieldCheck size={20} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Запись</span><span className="mt-2 block text-sm font-semibold">Уточните свободное время по телефону</span></span></div>
-          </div>
+        <div className="flex flex-col justify-center">
+          <p className="section-kicker">Наш подход</p>
+          <h2 className="mt-4 text-4xl font-extrabold leading-[.98] tracking-[-.055em] sm:text-5xl">У КАЖДОЙ<br/>ДЕТАЛИ ЕСТЬ<br/><span className="text-white/35">СВОЙ ПОДХОД.</span></h2>
+          <p className="mt-6 max-w-lg text-sm leading-7 text-white/60">Материалы кузова и салона требуют разного ухода. Перед работой важно понять задачу, состояние автомобиля и ожидаемый результат — чтобы подобрать подходящую процедуру.</p>
+          <ul className="mt-7 space-y-4">{["Подбор процедуры под состояние автомобиля","Согласование объёма работ до начала","Понятная коммуникация по стоимости и срокам"].map(item => <li key={item} className="flex items-start gap-3 text-sm text-white/75"><Check className="mt-0.5 shrink-0 text-[#48d1cc]" size={17}/>{item}</li>)}</ul>
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-[1440px] flex-col justify-between gap-5 px-5 py-7 text-[10px] text-white/45 sm:flex-row sm:items-center md:px-10 lg:px-14">
-        <a href="#top" className="flex items-center gap-3"><span className="text-lg font-black text-[#48d1cc]">G7</span><span className="tracking-[.18em]">GARAGE 007 DETAILING CENTER</span></a>
-        <span>Краснодар · Шоссе Нефтяников, 22, стр. 1</span>
-        <span>Концепция сайта · 2026</span>
+      <section id="process" className="border-y border-white/8 bg-[#151b1d]">
+        <div className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-24 lg:px-12">
+          <div className="max-w-2xl"><p className="section-kicker">Просто и понятно</p><h2 className="mt-4 text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">КАК МЫ РАБОТАЕМ</h2><p className="mt-4 text-sm leading-7 text-white/55">Оставьте заявку — детали и свободное время подтвердит сотрудник студии.</p></div>
+          <div className="mt-10 grid gap-3 md:grid-cols-3">{steps.map(([n,title,text]) => <article key={n} className="rounded-2xl border border-white/10 bg-[#1a2224] p-6 sm:p-7"><span className="text-sm font-bold text-[#48d1cc]">{n}</span><h3 className="mt-6 text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-white/55">{text}</p></article>)}</div>
+        </div>
+      </section>
+
+      <section id="contacts" className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-[1fr_.8fr] lg:gap-20 lg:px-12">
+        <div><p className="section-kicker">Связаться с G7</p><h2 className="mt-4 text-5xl font-black leading-[.9] tracking-[-.07em] sm:text-7xl">ТВОЙ АВТОМОБИЛЬ.<br/><span className="text-[#48d1cc]">НОВЫЙ УРОВЕНЬ.</span></h2><p className="mt-6 max-w-lg text-sm leading-7 text-white/55">Расскажите, что хотите улучшить. Поможем сориентироваться по услугам, стоимости и времени.</p><button onClick={() => openContact()} className="mt-8 rounded-xl bg-[#48d1cc] px-5 py-4 text-sm font-bold text-[#101719] transition hover:bg-[#72e0dc]">Обсудить задачу <ArrowUpRight className="ml-4 inline" size={16}/></button></div>
+        <div className="flex flex-col justify-center gap-7 rounded-2xl border border-white/10 bg-[#151b1d] p-6 sm:p-8">
+          <a href="tel:+79615235877" className="flex items-start gap-4"><Phone className="mt-1 text-[#48d1cc]" size={19}/><span><span className="block text-xs text-white/45">Телефон</span><span className="mt-1 block text-xl font-bold sm:text-2xl">+7 961 523-58-77</span></span></a>
+          <div className="flex items-start gap-4"><MapPin className="mt-1 text-[#48d1cc]" size={20}/><span><span className="block text-xs text-white/45">Адрес</span><span className="mt-1 block text-base font-semibold">Краснодар, ул. Шоссе Нефтяников, 22, стр. 1</span><a className="mt-2 inline-block text-sm font-semibold text-[#48d1cc] hover:underline" href="https://yandex.com/maps/?text=G7%20Detailing%20Center%20Краснодар" target="_blank" rel="noreferrer">Построить маршрут ↗</a></span></div>
+          <div className="flex items-start gap-4"><Clock3 className="mt-1 text-[#48d1cc]" size={20}/><span><span className="block text-xs text-white/45">Время работы</span><span className="mt-1 block font-semibold">Ежедневно, 09:00–21:00</span></span></div>
+          <div className="flex items-start gap-4"><ShieldCheck className="mt-1 text-[#48d1cc]" size={20}/><span><span className="block text-xs text-white/45">Запись</span><span className="mt-1 block text-sm text-white/75">Время подтвердим после обращения</span></span></div>
+        </div>
+      </section>
+
+      <footer className="border-t border-white/10">
+        <div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-4 px-5 py-7 text-xs text-white/40 sm:flex-row sm:items-center md:px-8 lg:px-12">
+          <a href="#top" className="flex items-center gap-3"><span className="flex h-8 w-9 items-center justify-center rounded-lg bg-[#48d1cc] font-black text-black">G7</span><span className="font-semibold tracking-[.12em]">GARAGE 007 DETAILING CENTER</span></a>
+          <span>Краснодар · Шоссе Нефтяников, 22, стр. 1</span><span>© G7 Detailing Center</span>
+        </div>
       </footer>
 
       {showContact && <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="contact-title" onClick={() => setShowContact(false)}>
-        <div className="relative w-full max-w-md border border-white/15 bg-[#171815] p-7 sm:p-9" onClick={(event) => event.stopPropagation()}>
-          <button onClick={() => setShowContact(false)} aria-label="Закрыть" className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center border border-white/15"><X size={18} /></button>
-          <p className="section-kicker">G7 / GARAGE 007</p>
-          <h2 id="contact-title" className="mt-5 text-3xl font-black tracking-tight">ОБСУДИМ УХОД?</h2>
-          <p className="mt-4 text-sm leading-6 text-white/60">Позвоните в студию — уточним услугу, стоимость и свободное время.</p>
-          <a href="tel:+79615235877" className="accent-link mt-7 flex items-center justify-between bg-[#48d1cc] px-5 py-4 text-sm font-black text-black"><span>+7 961 523-58-77</span><Phone size={17} /></a>
-          <a href="https://yandex.com/maps/?text=G7%20Detailing%20Center%20Краснодар" target="_blank" rel="noreferrer" className="mt-3 flex items-center justify-between border border-white/15 px-5 py-4 text-sm font-semibold transition hover:border-[#48d1cc]/60"><span>Как добраться</span><MapPin size={17} /></a>
+        <div className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-white/10 bg-[#151d1f] p-6 sm:p-8" onClick={event => event.stopPropagation()}>
+          <button onClick={() => setShowContact(false)} aria-label="Закрыть" className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-lg border border-white/10"><X size={18}/></button>
+          <p className="section-kicker">G7 / GARAGE 007</p><h2 id="contact-title" className="mt-4 pr-8 text-3xl font-extrabold tracking-tight">ОБСУДИМ УХОД?</h2>
+          <p className="mt-3 text-sm leading-6 text-white/55">Оставьте детали — откроется WhatsApp с готовым сообщением для студии. Время и стоимость подтвердит сотрудник.</p>
+          <form onSubmit={sendRequest} className="mt-6 space-y-4">
+            <label className="block text-sm text-white/70">Какая услуга интересует?
+              <select value={selectedService} onChange={e => setSelectedService(e.target.value)} className="mt-2 w-full rounded-xl border border-white/10 bg-[#0f1517] px-4 py-3 text-white outline-none focus:border-[#48d1cc]"><option value="">Пока не знаю / нужна консультация</option>{services.map(service => <option key={service.title} value={service.title}>{service.title}</option>)}</select>
+            </label>
+            <label className="block text-sm text-white/70">Марка и модель автомобиля <span className="text-white/35">(необязательно)</span><input value={car} onChange={e => setCar(e.target.value)} placeholder="Например, BMW 3 Series" className="mt-2 w-full rounded-xl border border-white/10 bg-[#0f1517] px-4 py-3 text-white outline-none placeholder:text-white/25 focus:border-[#48d1cc]"/></label>
+            <label className="block text-sm text-white/70">Как к вам обращаться <span className="text-white/35">(необязательно)</span><input value={name} onChange={e => setName(e.target.value)} placeholder="Ваше имя" className="mt-2 w-full rounded-xl border border-white/10 bg-[#0f1517] px-4 py-3 text-white outline-none placeholder:text-white/25 focus:border-[#48d1cc]"/></label>
+            <label className="block text-sm text-white/70">Комментарий <span className="text-white/35">(необязательно)</span><textarea value={message} onChange={e => setMessage(e.target.value)} rows={3} placeholder="Что хотите сделать с автомобилем?" className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-[#0f1517] px-4 py-3 text-white outline-none placeholder:text-white/25 focus:border-[#48d1cc]"/></label>
+            <button type="submit" className="w-full rounded-xl bg-[#48d1cc] px-5 py-4 text-sm font-bold text-[#101719] transition hover:bg-[#72e0dc]">Продолжить в WhatsApp <ArrowRight className="ml-2 inline" size={16}/></button>
+            <a href="tel:+79615235877" className="block text-center text-sm text-white/60 hover:text-[#48d1cc]">Или позвонить: +7 961 523-58-77</a>
+          </form>
         </div>
       </div>}
     </main>
