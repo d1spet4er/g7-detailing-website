@@ -19,7 +19,7 @@ const services = [
   { number: "01", title: "Полировка кузова", text: "Возвращаем лаку глубину цвета и блеск, убираем мелкие риски и следы эксплуатации.", price: "от 10 000 ₽", image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1000&q=85" },
   { number: "02", title: "Химчистка салона", text: "Глубокая очистка текстиля, ковров и труднодоступных зон с вниманием к деталям.", price: "от 16 000 ₽", image: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=1000&q=85" },
   { number: "03", title: "Уход за кожей", text: "Деликатная очистка и уход за кожаными поверхностями, чтобы сохранить их фактуру.", price: "от 3 000 ₽", image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85" },
-  { number: "04", title: "Защитные покрытия", text: "Гидрофобный эффект и дополнительная защита лакокрасочного покрытия.", price: "по запросу", image: "https://images.unsplash.com/photo-1613214150384-8f3e7d3f1d48?auto=format&fit=crop&w=1000&q=85" },
+  { number: "04", title: "Защитные покрытия", text: "Гидрофобный эффект и дополнительная защита лакокрасочного покрытия.", price: "по запросу", image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1000&q=85" },
 ];
 
 const gallery = [
@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
-      <div className="border-b border-white/10 bg-[#48d1cc] px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[.16em] text-black sm:text-xs">
+      <div className="border-b border-white/10 bg-[#171a1c] px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[.16em] text-[#48d1cc] sm:text-xs">
         GARAGE 007 · DETAILING CENTER · КРАСНОДАР
       </div>
 
@@ -122,7 +122,7 @@ export default function Home() {
       <section id="about" className="border-y border-white/10 bg-[#171815]">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-[.9fr_1.1fr] lg:gap-20 lg:px-14">
           <div className="relative min-h-[370px]">
-            <div className="hero-image absolute inset-0 right-8 bottom-8" style={{ backgroundImage: "linear-gradient(0deg,rgba(16,17,15,.1),rgba(16,17,15,.1)),url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1200&q=85')" }} />
+            <div className="hero-image absolute inset-0 right-8 bottom-8" style={{ backgroundImage: "linear-gradient(0deg,rgba(16,17,15,.1),rgba(16,17,15,.1)),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85')" }} />
             <div className="absolute bottom-0 right-0 flex h-28 w-28 flex-col justify-center bg-[#48d1cc] p-4 text-black"><span className="text-3xl font-black">G7</span><span className="mt-1 text-[9px] font-bold uppercase tracking-widest">Garage 007</span></div>
           </div>
           <div className="flex flex-col justify-center">
@@ -152,13 +152,13 @@ export default function Home() {
         <p className="mt-5 text-[11px] text-white/35">Фотографии на этой концепции — демонстрационные. Перед публикацией их нужно заменить реальными работами G7.</p>
       </section>
 
-      <section id="contacts" className="relative border-y border-white/10 bg-[#48d1cc] text-black">
-        <div className="site-grid absolute inset-0 opacity-20" />
+      <section id="contacts" className="relative border-y border-white/10 bg-[#171a1c] text-white">
+        <div className="site-grid absolute inset-0 opacity-10" />
         <div className="relative mx-auto grid max-w-[1440px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-[1.2fr_.8fr] lg:px-14">
-          <div><p className="text-[11px] font-bold uppercase tracking-[.2em]">04 / Контакты</p><h2 className="mt-5 text-5xl font-black leading-[.88] tracking-[-.065em] sm:text-7xl">ТВОЙ АВТОМОБИЛЬ.<br />НОВЫЙ<br />УРОВЕНЬ.</h2><p className="mt-7 max-w-md text-sm leading-6 text-black/65">Расскажите, что хотите улучшить — поможем подобрать подходящую услугу и сориентируем по стоимости.</p><button onClick={() => setShowContact(true)} className="mt-8 flex items-center gap-4 bg-black px-6 py-4 text-xs font-bold text-white transition hover:bg-black/80">Связаться с G7 <ArrowUpRight size={17} /></button></div>
-          <div className="flex flex-col justify-center gap-7 border-t border-black/20 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <a href="tel:+79615235877" className="flex items-start gap-4"><Phone size={19} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-black/55">Телефон</span><span className="mt-2 block text-xl font-black sm:text-2xl">+7 961 523-58-77</span></span></a>
-            <div className="flex items-start gap-4"><MapPin size={20} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Адрес студии</span><span className="mt-2 block text-base font-bold">Краснодар, ул. Шоссе Нефтяников, 22, стр. 1</span><a className="mt-2 inline-block border-b border-black/50 pb-1 text-xs font-semibold" href="https://yandex.com/maps/?text=G7%20Detailing%20Center%20Краснодар" target="_blank" rel="noreferrer">Построить маршрут ↗</a></span></div>
+          <div><p className="section-kicker">04 / Контакты</p><h2 className="mt-5 text-5xl font-black leading-[.88] tracking-[-.065em] sm:text-7xl">ТВОЙ АВТОМОБИЛЬ.<br />НОВЫЙ<br />УРОВЕНЬ.</h2><p className="mt-7 max-w-md text-sm leading-6 text-white/60">Расскажите, что хотите улучшить — поможем подобрать подходящую услугу и сориентируем по стоимости.</p><button onClick={() => setShowContact(true)} className="mt-8 flex items-center gap-4 bg-[#48d1cc] px-6 py-4 text-xs font-bold text-black transition hover:bg-[#6be0dc]">Связаться с G7 <ArrowUpRight size={17} /></button></div>
+          <div className="flex flex-col justify-center gap-7 border-t border-white/15 pt-8 lg:border-l lg:border-t-0 lg:border-white/15 lg:pl-10 lg:pt-0">
+            <a href="tel:+79615235877" className="flex items-start gap-4"><Phone size={19} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Телефон</span><span className="mt-2 block text-xl font-black sm:text-2xl">+7 961 523-58-77</span></span></a>
+            <div className="flex items-start gap-4"><MapPin size={20} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Адрес студии</span><span className="mt-2 block text-base font-bold">Краснодар, ул. Шоссе Нефтяников, 22, стр. 1</span><a className="mt-2 inline-block border-b border-[#48d1cc]/60 pb-1 text-xs font-semibold text-[#48d1cc]" href="https://yandex.com/maps/?text=G7%20Detailing%20Center%20Краснодар" target="_blank" rel="noreferrer">Построить маршрут ↗</a></span></div>
             <div className="flex items-start gap-4"><Clock3 size={20} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Время работы</span><span className="mt-2 block text-base font-bold">Ежедневно, 09:00–21:00</span></span></div>
             <div className="flex items-start gap-4"><ShieldCheck size={20} /><span><span className="block text-[10px] font-bold uppercase tracking-widest text-white/45">Запись</span><span className="mt-2 block text-sm font-semibold">Уточните свободное время по телефону</span></span></div>
           </div>
