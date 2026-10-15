@@ -3,19 +3,18 @@
 import { useEffect, useState } from "react";
 import {
   ArrowDownRight, ArrowUpRight, ArrowRight, Check, Clock3, MapPin,
-  Menu, Phone, ShieldCheck, Sparkles, X, Droplets, Gauge, Wind,
-  Layers3, SprayCan, CircleDot, Armchair, CarFront
+  Menu, Phone, ShieldCheck, Sparkles, X, Droplets, CarFront
 } from "lucide-react";
 
 const services = [
-  { title: "Полировка кузова", text: "Работа с блеском, мелкими рисками и следами эксплуатации лакокрасочного покрытия.", icon: Sparkles, tag: "Кузов", image: "polirovka.webp" },
-  { title: "Химчистка салона", text: "Глубокая очистка текстиля, ковров и труднодоступных зон салона.", icon: Armchair, tag: "Салон", image: "himchistka.webp" },
-  { title: "Уход за кожей", text: "Деликатная очистка и уход за кожаными поверхностями с сохранением фактуры.", icon: Layers3, tag: "Салон", image: "kozha.webp" },
-  { title: "Очистка пластика", text: "Очистка пластиковых элементов интерьера и аккуратное восстановление опрятного вида.", icon: SprayCan, tag: "Салон", image: "plastik.webp" },
-  { title: "Очистка подкапотного пространства", text: "Уход за подкапотной зоной с учётом материалов и особенностей автомобиля.", icon: Gauge, tag: "Уход", image: "podkapotnoe.webp" },
-  { title: "Удаление битума и металлических вкраплений", text: "Очистка кузова от стойких дорожных загрязнений специальными составами.", icon: CircleDot, tag: "Кузов", image: "ochistka-kuzova.webp" },
-  { title: "Защитные покрытия", text: "Дополнительная защита поверхности и гидрофобный эффект — по состоянию кузова.", icon: ShieldCheck, tag: "Защита", image: "zaschita.webp" },
-  { title: "Мойка и внешний уход", text: "Бережное удаление повседневных загрязнений и поддержание чистоты автомобиля.", icon: Droplets, tag: "Уход", image: "moyka.webp" },
+  { title: "Полировка кузова", text: "Работа с блеском, мелкими рисками и следами эксплуатации лакокрасочного покрытия.", tag: "Кузов", image: "polirovka.webp" },
+  { title: "Химчистка салона", text: "Глубокая очистка текстиля, ковров и труднодоступных зон салона.", tag: "Салон", image: "himchistka.webp" },
+  { title: "Уход за кожей", text: "Деликатная очистка и уход за кожаными поверхностями с сохранением фактуры.", tag: "Салон", image: "kozha.webp" },
+  { title: "Очистка пластика", text: "Очистка пластиковых элементов интерьера и аккуратное восстановление опрятного вида.", tag: "Салон", image: "plastik.webp" },
+  { title: "Очистка подкапотного пространства", text: "Уход за подкапотной зоной с учётом материалов и особенностей автомобиля.", tag: "Уход", image: "podkapotnoe.webp" },
+  { title: "Удаление битума и металлических вкраплений", text: "Очистка кузова от стойких дорожных загрязнений специальными составами.", tag: "Кузов", image: "ochistka-kuzova.webp" },
+  { title: "Защитные покрытия", text: "Дополнительная защита поверхности и гидрофобный эффект — по состоянию кузова.", tag: "Защита", image: "zaschita.webp" },
+  { title: "Мойка и внешний уход", text: "Бережное удаление повседневных загрязнений и поддержание чистоты автомобиля.", tag: "Уход", image: "moyka.webp" },
 ];
 
 const steps = [
@@ -126,9 +125,8 @@ export default function Home() {
           </div>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {services.map((service) => {
-              const Icon = service.icon;
               return <article data-reveal-item key={service.title} onClick={() => openContact(service.title)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openContact(service.title); } }} tabIndex={0} aria-label={`Уточнить стоимость: ${service.title}`} className="service-card flex min-h-[340px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#1a2224] transition hover:border-[#48d1cc]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#48d1cc]">
-                <div className="service-photo-wrap relative h-40 overflow-hidden sm:h-44"><img src={"/images/" + service.image} alt={service.title} loading="lazy" className="service-photo h-full w-full object-cover" /><span className="absolute left-4 top-4 rounded-full border border-white/20 bg-[#101719]/75 px-3 py-1 text-[10px] text-white/80 backdrop-blur">{service.tag}</span><span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-lg bg-[#101719]/80 text-[#48d1cc] backdrop-blur"><Icon size={18}/></span></div>
+                <div className="service-photo-wrap relative h-40 overflow-hidden sm:h-44"><img src={"/images/" + service.image} alt={service.title} loading="lazy" className="service-photo h-full w-full object-cover" /><span className="absolute left-4 top-4 rounded-full border border-white/20 bg-[#101719]/75 px-3 py-1 text-[10px] text-white/80 backdrop-blur">{service.tag}</span></div>
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h3 className="text-xl font-bold leading-snug tracking-tight">{service.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-6 text-white/55">{service.text}</p>
