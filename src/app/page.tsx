@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import {
   ArrowDownRight, ArrowUpRight, ArrowRight, Check, Clock3, MapPin,
-  Menu, Phone, Sparkles, X, CarFront
+  Menu, Phone, ShieldCheck, Sparkles, X, CarFront
 } from "lucide-react";
 
 const services = [
