@@ -47,3 +47,28 @@ button:not(:disabled):active { transform:scale(.985); }
   body { background-attachment:scroll; }
   .service-card:hover .service-photo-wrap::before { animation:none; }
 }
+
+/* Scroll reveal: content enters once as it reaches the viewport */
+[data-reveal] {
+  opacity:0;
+  transform:translate3d(0,24px,0);
+  transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1);
+}
+[data-reveal].is-visible {
+  opacity:1;
+  transform:translate3d(0,0,0);
+}
+[data-reveal-item] {
+  opacity:0;
+  transform:translate3d(0,18px,0);
+  transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1);
+}
+[data-reveal-item].is-visible { opacity:1; transform:translate3d(0,0,0); }
+#services [data-reveal-item]:nth-child(2),
+#process [data-reveal-item]:nth-child(2) { transition-delay:90ms; }
+#services [data-reveal-item]:nth-child(3),
+#process [data-reveal-item]:nth-child(3) { transition-delay:180ms; }
+#services [data-reveal-item]:nth-child(4) { transition-delay:270ms; }
+@media (prefers-reduced-motion:reduce) {
+  [data-reveal], [data-reveal-item] { opacity:1; transform:none; transition:none; }
+}
